@@ -4,7 +4,8 @@
   "description": "Generate forms based on a JSON schema",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "compile": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,33 @@
   "bugs": {
     "url": "https://github.com/skyarch-networks/json-schema-form/issues"
   },
-  "homepage": "https://github.com/skyarch-networks/json-schema-form#readme"
+  "homepage": "https://github.com/skyarch-networks/json-schema-form#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(spec))\\.(ts?)$",
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "json",
+      "node"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
 }
