@@ -1,0 +1,24 @@
+{
+  "name": "json-schema-form",
+  "version": "0.1.0",
+  "description": "Generate forms based on a JSON schema",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyarch-networks/json-schema-form.git"
+  },
+  "keywords": [
+    "form",
+    "form-generator",
+    "json-schema-form"
+  ],
+  "author": "Skyarch Networks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skyarch-networks/json-schema-form/issues"
+  },
+  "homepage": "https://github.com/skyarch-networks/json-schema-form#readme"
+}
