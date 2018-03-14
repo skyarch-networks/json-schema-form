@@ -2,10 +2,14 @@ import JSONSchemaForm from "../JSONSchemaForm";
 
 describe("JSONSchemaForm", () => {
 
-  const form = new JSONSchemaForm("World");
+  document.body.innerHTML = `<form id="test-form"></form>`;
+  const el = document.getElementById("test-form") as HTMLFormElement;
+
+  const form = new JSONSchemaForm(el);
 
   test("It works", () => {
-    expect(form.greet()).toEqual("Hello World!");
+    form.render();
+    console.log(document.body.outerHTML);
   });
 
 });
