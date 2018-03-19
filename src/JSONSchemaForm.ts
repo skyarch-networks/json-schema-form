@@ -1,28 +1,47 @@
-import TextField from "./TextField";
+import { ITextFieldAttributes, TextField } from "./TextField";
+
+interface ISchema {
+  $schema: string;
+  type: string;
+  properties: {
+    [key: string]: ITextFieldAttributes;
+  };
+  required?: string[];
+}
 
 class JSONSchemaForm {
 
-  private CONTAINER: HTMLFormElement;
-  private SCHEMA: object;
-  private DATA: object;
+  public elements: any = {};
+  private container: HTMLFormElement;
+  private schema: ISchema;
 
-  constructor(container: HTMLFormElement, schema: object = {}, data: object = {}) {
-    this.CONTAINER = container;
-    this.SCHEMA = schema;
-    this.DATA = data;
+  constructor(container: HTMLFormElement, schema: ISchema) {
+    this.container = container;
+    this.schema = schema;
+
+    this.parseSchema();
   }
 
   public render = (): void => {
-    // const span = document.createElement("span");
-    // const text = document.createTextNode("Hello");
-    // span.appendChild(text);
-    // this.CONTAINER.appendChild(span);
-    // const test: HTMLElement = new TextField().setPlaceholder("test placeholder").render();
-    this.CONTAINER.appendChild(new TextField().setPlaceholder("test placeholder").render());
+    for (const elementName in this.elements) {
+      /* istanbul ignore else */
+      if (this.elements.hasOwnProperty(elementName)) {
+        this.container.appendChild(this.elements[elementName].render());
+      }
+    }
   }
 
-  private logError = (error: string): void => {
-    console.error(error);
+  private parseSchema = (): void => {
+    for (const propertyName in this.schema.properties) {
+      /* istanbul ignore else */
+      if (this.schema.properties.hasOwnProperty(propertyName)) {
+        const property = this.schema.properties[propertyName];
+        switch (property.type) {
+          case "string":
+            this.elements[propertyName] = new TextField().setAttributes(this.schema.properties[propertyName]);
+        }
+      }
+    }
   }
 
 }
