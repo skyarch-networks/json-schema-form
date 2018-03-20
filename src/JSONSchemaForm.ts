@@ -1,10 +1,14 @@
-import { ITextFieldAttributes, TextField } from "./TextField";
+import { Button, ButtonAttrs } from "./Button";
+import { TextField, TextFieldAttrs } from "./TextField";
 
-interface ISchema {
+// TODO: Waiting for conditional types in TypeScript 2.8
+type ElementAttr = ButtonAttrs | TextFieldAttrs;
+
+interface SchemaProps {
   $schema: string;
   type: string;
   properties: {
-    [key: string]: ITextFieldAttributes;
+    [key: string]: ElementAttr;
   };
   required?: string[];
 }
@@ -13,9 +17,9 @@ class JSONSchemaForm {
 
   public elements: any = {};
   private container: HTMLFormElement;
-  private schema: ISchema;
+  private schema: SchemaProps;
 
-  constructor(container: HTMLFormElement, schema: ISchema) {
+  constructor(container: HTMLFormElement, schema: SchemaProps) {
     this.container = container;
     this.schema = schema;
 
@@ -35,13 +39,16 @@ class JSONSchemaForm {
      * individually access those elements later on.
      */
     Object.keys(this.schema.properties).map((elementName: string) => {
-      const element = this.schema.properties[elementName];
+      const element: ElementAttr = this.schema.properties[elementName];
       /**
        * Feed each element to this.elements
        */
       switch (element.type) {
         case "string":
           this.elements[elementName] = new TextField().setAttributes(element);
+          break;
+        case "button":
+          this.elements[elementName] = new Button();
           break;
       }
     });

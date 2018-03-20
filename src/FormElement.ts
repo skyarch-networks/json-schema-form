@@ -1,4 +1,9 @@
-abstract class FormElement {
+export interface FormElementAttrs {
+  description?: string;
+  title?: string;
+}
+
+export abstract class FormElement {
 
   protected element: HTMLElement;
 
@@ -11,5 +16,3 @@ abstract class FormElement {
   }
 
 }
-
-export default FormElement;

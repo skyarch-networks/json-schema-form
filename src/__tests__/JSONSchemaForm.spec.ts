@@ -11,11 +11,16 @@ describe("JSONSchemaForm", () => {
     $schema: "http://json-schema.org/schema#",
     properties: {
       firstName: {
-        description: "First Name",
+        description: "Textbox Description",
         maxLength: 50,
         minLength: 1,
-        title: "First Name",
+        title: "Textbox Title",
         type: "string",
+      },
+      submit: {
+        description: "Button Description",
+        title: "Button Title",
+        type: "button",
       },
     },
     type: "object",

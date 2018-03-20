@@ -1,12 +1,10 @@
-export interface ITextFieldAttributes {
-  title?: string;
-  type: string;
-  description?: string;
+import { FormElement, FormElementAttrs } from "./FormElement";
+
+export interface TextFieldAttrs extends FormElementAttrs {
+  type: "string";
   maxLength?: number;
   minLength?: number;
 }
-
-import FormElement from "./FormElement";
 
 export class TextField extends FormElement {
 
@@ -14,7 +12,7 @@ export class TextField extends FormElement {
     super("input");
   }
 
-  public setAttributes = (attributes: ITextFieldAttributes): TextField => {
+  public setAttributes = (attributes: TextFieldAttrs): TextField => {
     /* istanbul ignore else */
     if (attributes.title) { this.element.setAttribute("title", attributes.title); }
     /* istanbul ignore else */
