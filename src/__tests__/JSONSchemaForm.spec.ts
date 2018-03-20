@@ -7,21 +7,6 @@ describe("JSONSchemaForm", () => {
 
   document.body.appendChild(form);
 
-  const testSchema = `$schema": "http://json-schema.org/schema#",
-  "type": "object",
-  "properties": {
-      "firstName": {
-          "title": "First Name",
-          "type": "string",
-          "description": "First Name",
-          "maxLength": 0,
-          "minLength": 0
-      }
-  },
-  "required": [
-      "firstName"
-  ]`;
-
   const jsonSchemaForm = new JSONSchemaForm(form, {
     $schema: "http://json-schema.org/schema#",
     properties: {

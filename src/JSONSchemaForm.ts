@@ -23,25 +23,28 @@ class JSONSchemaForm {
   }
 
   public render = (): void => {
-    for (const elementName in this.elements) {
-      /* istanbul ignore else */
-      if (this.elements.hasOwnProperty(elementName)) {
-        this.container.appendChild(this.elements[elementName].render());
-      }
-    }
+    Object.keys(this.elements).map((elementName: string) => {
+      this.container.appendChild(this.elements[elementName].render());
+    });
   }
 
   private parseSchema = (): void => {
-    for (const propertyName in this.schema.properties) {
-      /* istanbul ignore else */
-      if (this.schema.properties.hasOwnProperty(propertyName)) {
-        const property = this.schema.properties[propertyName];
-        switch (property.type) {
-          case "string":
-            this.elements[propertyName] = new TextField().setAttributes(this.schema.properties[propertyName]);
-        }
+    /**
+     * The "properties" of the JSON Schema will be used to generate to form controls.
+     * The object keys will be the element names that can be used to by the users to
+     * individually access those elements later on.
+     */
+    Object.keys(this.schema.properties).map((elementName: string) => {
+      const element = this.schema.properties[elementName];
+      /**
+       * Feed each element to this.elements
+       */
+      switch (element.type) {
+        case "string":
+          this.elements[elementName] = new TextField().setAttributes(element);
+          break;
       }
-    }
+    });
   }
 
 }
