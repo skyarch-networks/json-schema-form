@@ -8,8 +8,11 @@ export interface TextFieldAttrs extends FormElementAttrs {
 
 export class TextField extends FormElement {
 
-  constructor() {
+  constructor(id?: string) {
     super("input");
+
+    /* istanbul ignore else */
+    if (id) { this.element.setAttribute("id", id); }
   }
 
   public setAttributes = (attributes: TextFieldAttrs): TextField => {

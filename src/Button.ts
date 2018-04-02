@@ -7,8 +7,11 @@ export interface ButtonAttrs extends FormElementAttrs {
 
 export class Button extends FormElement {
 
-  constructor() {
+  constructor(id?: string) {
     super("button");
+
+    /* istanbul ignore else */
+    if (id) { this.element.setAttribute("id", id); }
   }
 
 }

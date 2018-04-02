@@ -1,7 +1,8 @@
 import { Button, ButtonAttrs } from "./Button";
 import { TextField, TextFieldAttrs } from "./TextField";
 
-// TODO: Waiting for conditional types in TypeScript 2.8
+import camelToKebab from "./CamelToKebab";
+
 type ElementAttr = ButtonAttrs | TextFieldAttrs;
 
 interface SchemaProps {
@@ -40,15 +41,16 @@ class JSONSchemaForm {
      */
     Object.keys(this.schema.properties).map((elementName: string) => {
       const element: ElementAttr = this.schema.properties[elementName];
+      const elementID: string = camelToKebab(elementName);
       /**
        * Feed each element to this.elements
        */
       switch (element.type) {
         case "string":
-          this.elements[elementName] = new TextField().setAttributes(element);
+          this.elements[elementName] = new TextField(elementID).setAttributes(element);
           break;
         case "button":
-          this.elements[elementName] = new Button();
+          this.elements[elementName] = new Button(elementID);
           break;
       }
     });

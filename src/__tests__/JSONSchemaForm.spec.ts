@@ -10,7 +10,7 @@ describe("JSONSchemaForm", () => {
   const jsonSchemaForm = new JSONSchemaForm(form, {
     $schema: "http://json-schema.org/schema#",
     properties: {
-      firstName: {
+      someTextbox: {
         description: "Textbox Description",
         maxLength: 50,
         minLength: 1,
@@ -29,7 +29,8 @@ describe("JSONSchemaForm", () => {
   test("It renders properly", () => {
     jsonSchemaForm.render();
     expect(form.outerHTML).toEqual(
-      `<form id="test-form"><input title="First Name" placeholder="First Name" maxlength="50" minlength="1"></form>`);
+      `<form id="test-form"><input id="some-textbox" title="Textbox Title" placeholder="Textbox Description" ` +
+      `maxlength="50" minlength="1"><button id="submit"></button></form>`);
   });
 
 });
